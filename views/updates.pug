@@ -7,9 +7,9 @@ html
         meta(name="viewport" content="width=device-width, initial-scale=1")
         link(rel="stylesheet", href="/css/style.css")
     body    
-        h1 Contacts
+        h1 Cities
         .cards 
-            each contact in data
+            each city in data
                 .card 
-                    h2.card__name #{contact.properties.firstname}  #{contact.properties.lastname}
-                    p.card__email #{contact.properties.email}
+                    h2.card__name #{city.properties.name}  #{city.properties.population}
+                    p.card__email #{city.properties.tourist_spot}
