@@ -7,9 +7,18 @@ html
         meta(name="viewport" content="width=device-width, initial-scale=1")
         link(rel="stylesheet", href="/css/style.css")
     body    
-        h1 Cities
-        .cards 
-            each city in data
-                .card 
-                    h2.card__name #{city.properties.name}  #{city.properties.population}
-                    p.card__email #{city.properties.tourist_spot}
+        h1 Cities Table
+        a(href="/update-cobj")
+            h3 Add/Update this table
+        table
+            thead
+                tr
+                    th Name
+                    th Population
+                    th Tourist Spot
+            tbody
+                each city in data
+                    tr
+                        td #{city.properties.name}
+                        td #{city.properties.population}
+                        td #{city.properties.tourist_spot}

@@ -7,9 +7,20 @@ html
         meta(name="viewport" content="width=device-width, initial-scale=1")
         link(rel="stylesheet", href="/css/style.css")
     body    
-        h1 Cities
-        .cards 
-            each city in data
-                .card 
-                    h2.card__name #{city.properties.name}  #{city.properties.population}
-                    p.card__email #{city.properties.tourist_spot}
+        a(href="/")
+            h1 Return to the homepage
+
+        div.form-wrapper
+            h2 Create New City Record
+            form(action="/update-cobj" method="POST")
+                div.form-group
+                    label(for="name") Name:
+                    input(type="text" id="name" name="name" required)
+                div.form-group
+                    label(for="population") Population:
+                    input(type="text" id="population" name="population" required)
+                div.form-group
+                    label(for="tourist_spot") Tourist Spot:
+                    input(type="text" id="tourist_spot" name="tourist_spot" required)
+                div.form-group
+                    input(type="submit" value="Submit")

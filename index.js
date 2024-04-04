@@ -14,7 +14,7 @@ const PRIVATE_APP_ACCESS = '';
 // Route 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 app.get('/', async (req, res) => {
     try {
-        const customObjects = 'https://api.hubapi.com/crm/v3/objects/cities';
+        const customObjects = 'https://api.hubapi.com/crm/v3/objects/cities?properties=name,population,tourist_spot';
         const headers = {
             Authorization: `Bearer ${process.env.PRIVATE_APP_ACCESS}`,
             'Content-Type': 'application/json'
@@ -22,7 +22,6 @@ app.get('/', async (req, res) => {
         const resp = await axios.get(customObjects, { headers });
         const data = resp.data.results;
 
-        console.log(data);
         res.render('homepage', { title: 'Custom Objects | HubSpot APIs', data });
     } catch (error) {
         console.error(error);
@@ -31,11 +30,24 @@ app.get('/', async (req, res) => {
 
 // Route 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
 app.get('/update-cobj', (req, res) => {
-    res.render('updates', { title: 'Update Custom Object Form | Integrating With HubSpot | Practicum' });
+    res.render('updates', { title: 'Update Custom Object Form | Integrating With HubSpot I Practicum' });
 });
 // Route 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 
-
+app.post('/update-cobj', async (req, res) => {
+    try {
+        const newObject = {properties:req.body};
+        const createObject = 'https://api.hubspot.com/crm/v3/objects/cities';
+        const headers = {
+            Authorization: `Bearer ${process.env.PRIVATE_APP_ACCESS}`,
+            'Content-Type': 'application/json'
+        };
+        await axios.post(createObject, newObject, { headers });
+        res.redirect('/');
+    } catch (error) {
+        console.error(error);
+    }
+});
 
 // * Localhost
 app.listen(3000, () => console.log('Listening on http://localhost:3000'));
